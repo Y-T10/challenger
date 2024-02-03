@@ -39,7 +39,7 @@ CPMAddPackage(
 
 # システム内のパッケージを読み込む
 find_package(Threads REQUIRED)
-#find_package(Boost REQUIRED)
+find_package(Boost REQUIRED)
 
 # Add sub directories
 add_subdirectory(src)
