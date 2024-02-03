@@ -51,7 +51,16 @@ CPMAddPackage(
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED)
 
-add_library()
+# ライブラリの宣言
+add_library(${PROJECT_NAME})
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-# Add sub directories
-add_subdirectory(src)
+# ライブラリの設定
+target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_sources(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SDLCpp_video.cpp
+)
+target_link_libraries(
+    ${PROJECT_NAME} PUBLIC
+    SDL3::SDL3 Threads::Threads Boost::boost
+)
