@@ -9,7 +9,7 @@
 #include "SDL2/SDL_events.h"
 #include "SDL2/SDL_video.h"
 
-namespace SDL2Cpp {
+namespace challenger {
     /// 本来は ``decltype([](T*ptr){deleter(ptr)})`` としたかった．
     /// しかし2024/1/22時点では、g++がこれをうまく処理できない．
     /// そのためこの構造体を定義した

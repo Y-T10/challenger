@@ -7,7 +7,7 @@
 #include "SDL2/SDL_events.h"
 #include "SDL2/SDL_video.h"
 
-void SDL2Cpp::RenderSurface(const Renderer& renderer, const Surface& surface, const int x, const int y) noexcept {
+void challenger::RenderSurface(const Renderer& renderer, const Surface& surface, const int x, const int y) noexcept {
     if(surface.get() == nullptr) {
         return;
     }
@@ -20,7 +20,7 @@ void SDL2Cpp::RenderSurface(const Renderer& renderer, const Surface& surface, co
     SDL_RenderCopy(renderer.get(), texture.get(), &src_area, &dst_area);
 }
 
-const std::optional<std::pair<float,float>> SDL2Cpp::FitRenderOutput(const Renderer& renderer, const Window& window) {
+const std::optional<std::pair<float,float>> challenger::FitRenderOutput(const Renderer& renderer, const Window& window) {
     int render_w = 0, render_h = 0;
     int window_w = 0, window_h = 0;
     SDL_GetWindowSize(window.get(), &window_w, &window_h);
