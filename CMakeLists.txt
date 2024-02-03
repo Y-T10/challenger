@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # このプロジェクトの概要を設定する
-project(cpp_template
+project(challenger
     VERSION 0.0.1
     LANGUAGES CXX
     DESCRIPTION "Personal cpp template repository."
@@ -50,6 +50,8 @@ CPMAddPackage(
 # システム内のパッケージを読み込む
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED)
+
+add_library()
 
 # Add sub directories
 add_subdirectory(src)
