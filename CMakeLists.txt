@@ -10,6 +10,7 @@ project(challenger
 # ビルド周りの設定
 option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
 option(CMAKE_BUILD_TYPE "Build type." Release)
+option(BUILD_EXAMPLE "Build example programs" OFF)
 
 # CMAKE_EXPORT_COMPILE_COMMANDSの既定値を設定する
 if ((NOT (DEFINED $ENV{CMAKE_EXPORT_COMPILE_COMMANDS})) AND (DEFINED CMAKE_EXPORT_COMPILE_COMMANDS))
@@ -65,3 +66,8 @@ target_link_libraries(
     ${PROJECT_NAME} PUBLIC
     SDL3::SDL3 Threads::Threads Boost::boost
 )
+
+# サンプルプログラムのビルド
+if(${BUILD_EXAMPLE})
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/example)
+endif()
