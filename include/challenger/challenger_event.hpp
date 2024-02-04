@@ -15,5 +15,5 @@ namespace challenger {
      * @brief イベントをすべて取り出す
      * @return std::vector<SDL_Event> 取り出したイベントの配列
      */
-    inline std::vector<SDL_Event> FetchAllEvents() noexcept;
+    std::vector<SDL_Event> FetchAllEvents() noexcept;
 }

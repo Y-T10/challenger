@@ -42,7 +42,7 @@ namespace {
     static_assert(std::input_iterator<event_queue_iterator<false>>);
 }
 
-inline std::vector<SDL_Event> challenger::FetchAllEvents() noexcept {
+std::vector<SDL_Event> challenger::FetchAllEvents() noexcept {
     SDL_LockEventQueue();
     assert(SDL_IsEventQueueActive());
     /// インクリメント時に移動元の要素を破棄する．
