@@ -5,9 +5,10 @@
 #include <utility>
 #include <memory>
 
-#include "SDL2/SDL_render.h"
-#include "SDL2/SDL_events.h"
-#include "SDL2/SDL_video.h"
+#include "SDL3/SDL_surface.h"
+#include "SDL3/SDL_render.h"
+#include "SDL3/SDL_events.h"
+#include "SDL3/SDL_video.h"
 
 namespace challenger {
     /// 本来は ``decltype([](T*ptr){deleter(ptr)})`` としたかった．
@@ -25,7 +26,7 @@ namespace challenger {
 
     using Window = SDL_ptr<SDL_Window, SDL_DestroyWindow>;
     using Renderer = SDL_ptr<SDL_Renderer, SDL_DestroyRenderer>;
-    using Surface = SDL_ptr<SDL_Surface, SDL_FreeSurface>;
+    using Surface = SDL_ptr<SDL_Surface, SDL_DestroySurface>;
     using Texture = SDL_ptr<SDL_Texture, SDL_DestroyTexture>;
 
     int hello() noexcept;
