@@ -17,6 +17,8 @@ namespace {
 
         event_queue_iterator(pointer p):
         iter(p){}
+        event_queue_iterator():
+        iter(nullptr){}
 
         reference operator*() const noexcept {
             return *(SDL_GetEvent(iter));
