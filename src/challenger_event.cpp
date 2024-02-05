@@ -1,4 +1,5 @@
 #include "challenger/challenger_event.hpp"
+#include <cassert>
 
 namespace {
     /**
@@ -35,10 +36,12 @@ namespace {
         };
 
         reference operator*() const noexcept {
+            assert(!!iter);
             return *(SDL_GetEvent(iter));
         }
 
         event_queue_iterator& operator++() noexcept {
+            assert(!!iter);
             iter = SDL_ForwardElement(iter, does_remove);
             return *this;
         }
