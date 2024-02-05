@@ -55,6 +55,10 @@ namespace {
         bool operator==(const event_queue_iterator& rval) noexcept {
             return iter == rval.iter;
         }
+
+        bool operator!=(const event_queue_iterator& rval) noexcept {
+            return !(iter == rval.iter);
+        }
     };
 
     static_assert(std::input_iterator<event_queue_iterator<true>>);
