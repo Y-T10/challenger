@@ -57,7 +57,7 @@ namespace {
         }
 
         bool operator!=(const event_queue_iterator& rval) noexcept {
-            return !(iter == rval.iter);
+            return !(*this == rval);
         }
     };
 
