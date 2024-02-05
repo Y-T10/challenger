@@ -19,6 +19,20 @@ namespace {
         iter(p){}
         event_queue_iterator():
         iter(nullptr){}
+        event_queue_iterator(const event_queue_iterator& rval) = delete;
+        event_queue_iterator(event_queue_iterator&& rval)
+        :iter(rval.iter) {
+            rval.iter = nullptr;
+        }
+
+        event_queue_iterator& operator=(const event_queue_iterator& rval) = delete;
+        event_queue_iterator& operator=(event_queue_iterator&& rval) {
+            if(this == &rval) {
+                return *this;
+            }
+            iter = rval.iter;
+            rval.iter = nullptr;
+        };
 
         reference operator*() const noexcept {
             return *(SDL_GetEvent(iter));
