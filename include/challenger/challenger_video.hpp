@@ -3,6 +3,7 @@
 #include <optional>
 #include <type_traits>
 #include <utility>
+#include <string>
 #include <memory>
 
 #include "SDL3/SDL_surface.h"
@@ -40,6 +41,14 @@ namespace challenger {
         }
         return nullptr;
     };
+
+    inline const Window CreateWindow(const std::string& title, int w, int h, Uint32 flags) noexcept {
+        return Window(SDL_CreateWindow(title.c_str(), w, h, flags));
+    };
+
+    inline const Renderer CreateDefaultRenderer(const Window& window, Uint32 flags) noexcept {
+        return Renderer(SDL_CreateRenderer(window.get(), nullptr, flags));
+    }; 
 
     template <SDL_EventType event_type, class event_functor>
     struct EventFunctor {
