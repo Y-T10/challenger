@@ -30,8 +30,6 @@ namespace challenger {
     using Surface = SDL_ptr<SDL_Surface, SDL_DestroySurface>;
     using Texture = SDL_ptr<SDL_Texture, SDL_DestroyTexture>;
 
-    int hello() noexcept;
-
     template<class ptr_type, auto Func, class ...Args>
     const ptr_type Create(Args&& ...args) noexcept {
         constexpr bool chechFunc = std::is_invocable_r_v<typename ptr_type::pointer, decltype(Func), Args...>;
