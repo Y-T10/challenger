@@ -3,6 +3,7 @@
 #include <optional>
 #include <type_traits>
 #include <utility>
+#include <string>
 #include <memory>
 
 #include "SDL3/SDL_surface.h"
@@ -29,8 +30,6 @@ namespace challenger {
     using Surface = SDL_ptr<SDL_Surface, SDL_DestroySurface>;
     using Texture = SDL_ptr<SDL_Texture, SDL_DestroyTexture>;
 
-    int hello() noexcept;
-
     template<class ptr_type, auto Func, class ...Args>
     const ptr_type Create(Args&& ...args) noexcept {
         constexpr bool chechFunc = std::is_invocable_r_v<typename ptr_type::pointer, decltype(Func), Args...>;
@@ -41,30 +40,13 @@ namespace challenger {
         return nullptr;
     };
 
-    template <SDL_EventType event_type, class event_functor>
-    struct EventFunctor {
-        constexpr static auto type = event_type;
-        using functor = event_functor;
+    inline const Window CreateWindow(const std::string& title, int w, int h, Uint32 flags) noexcept {
+        return Window(SDL_CreateWindow(title.c_str(), w, h, flags));
     };
 
-    template<class context_type>
-    void DispatchEvent(const SDL_Event& event, context_type& ctx) {
-        return;
-    }
-
-    template<class context_type, class handler, class ...rests>
-    void DispatchEvent(SDL_Event&& event, context_type&& ctx) {
-        static_assert(std::is_invocable_v<typename handler::functor, SDL_Event&&, context_type&&>);
-        if(event.type == handler::type){
-            typename handler::functor{}(std::forward<SDL_Event>(event), std::forward<context_type>(ctx));
-            return;
-        }
-        if constexpr (sizeof...(rests) > 0) {
-            DispatchEvent<context_type, rests...>(std::forward<SDL_Event>(event), std::forward<context_type>(ctx));
-            return;
-        }
-        return;
-    }
+    inline const Renderer CreateDefaultRenderer(const Window& window, Uint32 flags) noexcept {
+        return Renderer(SDL_CreateRenderer(window.get(), nullptr, flags));
+    }; 
 
     const std::optional<std::pair<float,float>> FitRenderOutput(const Renderer& renderer, const Window& window);
     void RenderSurface(const Renderer& renderer, const Surface& surface, const int x, const int y) noexcept;
