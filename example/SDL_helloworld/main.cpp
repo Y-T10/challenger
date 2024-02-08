@@ -18,7 +18,7 @@ int main() {
         SDL_Quit();
     };
 
-    challe::Window window = challe::Create<challe::Window, SDL_CreateWindow>(
+    challe::Window window = challe::CreateWindow(
         "Hello SDL", 640, 480, 0
     );
 
@@ -26,9 +26,7 @@ int main() {
         return __LINE__;
     }
 
-    challe::Renderer renderer = challe::Create<challe::Renderer, SDL_CreateRenderer>(
-        window.get(), (const char*)nullptr, 0
-    );
+    challe::Renderer renderer = challe::CreateDefaultRenderer(window, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
 
     if(renderer.get() == nullptr) {
         return __LINE__;
