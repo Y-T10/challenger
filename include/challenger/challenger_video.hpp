@@ -11,18 +11,10 @@
 #include "SDL3/SDL_video.h"
 
 namespace challenger {
-    /// 本来は ``decltype([](T*ptr){deleter(ptr)})`` としたかった．
-    /// しかし2024/1/22時点では、g++がこれをうまく処理できない．
-    /// そのためこの構造体を定義した
-    template<class T, void(*deleter)(T*)>
-    struct SDL_deleter {
-        void operator()(T* ptr) {
-            deleter(ptr);
-        };
-    };
-
     template<class T, auto deleter>
-    using SDL_ptr = std::unique_ptr<T, SDL_deleter<T, deleter>>;
+    using SDL_ptr = std::unique_ptr<T, decltype([](T* ptr){
+        deleter(ptr);
+    })>;
 
     using Window = SDL_ptr<SDL_Window, SDL_DestroyWindow>;
     using Renderer = SDL_ptr<SDL_Renderer, SDL_DestroyRenderer>;
