@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "SDL3/SDL_render.h"
-#include "SDL3/SDL_events.h"
 #include "SDL3/SDL_video.h"
 
 void challenger::RenderSurface(const Renderer& renderer, const Surface& surface, const int x, const int y) noexcept {
