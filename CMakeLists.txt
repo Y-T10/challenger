@@ -39,7 +39,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake)
 CPMAddPackage(
     NAME SDL
     GITHUB_REPOSITORY "libsdl-org/SDL"
-    GIT_TAG prerelease-3.1.1
+    GIT_TAG main
 )
 
 # システム内のパッケージを読み込む
