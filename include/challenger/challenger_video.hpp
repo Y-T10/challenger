@@ -1,21 +1,16 @@
 #pragma once
 
-#include <optional>
 #include <type_traits>
-#include <utility>
 #include <string>
 
 #include "challenger_memory.hpp"
 
 #include "SDL3/SDL_surface.h"
-#include "SDL3/SDL_render.h"
 #include "SDL3/SDL_video.h"
 
 namespace challenger {
     using Window = SDL_ptr<SDL_Window, SDL_DestroyWindow>;
-    using Renderer = SDL_ptr<SDL_Renderer, SDL_DestroyRenderer>;
     using Surface = SDL_ptr<SDL_Surface, SDL_DestroySurface>;
-    using Texture = SDL_ptr<SDL_Texture, SDL_DestroyTexture>;
 
     template<class ptr_type, auto Func, class ...Args>
     const ptr_type Create(Args&& ...args) noexcept {
@@ -31,18 +26,4 @@ namespace challenger {
         return Window(SDL_CreateWindow(title.c_str(), w, h, flags));
     };
 
-    inline const Renderer CreateDefaultRenderer(const Window& window, Uint32 flags) noexcept {
-        return Renderer(SDL_CreateRenderer(window.get(), nullptr, flags));
-    }; 
-
-    inline const Surface CreateSurface(const int w, const int h, const SDL_PixelFormatEnum format) noexcept {
-        return Surface(SDL_CreateSurface(w, h, format));
-    }
-
-    inline const Texture CreateTexture(const Renderer renderer, const SDL_PixelFormatEnum format, const SDL_TextureAccess access, const int w, const int h) noexcept {
-        return Texture(SDL_CreateTexture(renderer.get(), format, access, w, h));
-    }
-
-    const std::optional<std::pair<float,float>> FitRenderOutput(const Renderer& renderer, const Window& window);
-    void RenderSurface(const Renderer& renderer, const Surface& surface, const int x, const int y) noexcept;
 }
