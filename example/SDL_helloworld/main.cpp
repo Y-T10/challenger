@@ -1,4 +1,3 @@
-#include "challenger/challenger.hpp"
 #include "challenger/challenger_event.hpp"
 #include "challenger/challenger_video.hpp"
 #include "SDL_timer.h"
