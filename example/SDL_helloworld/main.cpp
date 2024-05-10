@@ -1,3 +1,5 @@
+#include "challenger/challenger_memory.hpp"
+#include "challenger/challenger_render.hpp"
 #include "challenger/challenger_event.hpp"
 #include "challenger/challenger_video.hpp"
 #include "SDL_timer.h"
@@ -7,6 +9,7 @@
 #include "boost/scope_exit.hpp"
 
 namespace challe = challenger;
+using namespace challenger;
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) == -1) {
@@ -17,17 +20,15 @@ int main() {
         SDL_Quit();
     };
 
-    challe::Window window = challe::CreateWindow(
-        "Hello SDL", 640, 480, 0
-    );
+    auto window = Create<Window, SDL_CreateWindow>("Hello SDL", 640, 480, 0);
 
-    if(window.get() == nullptr) {
+    if(!window) {
         return __LINE__;
     }
 
-    challe::Renderer renderer = challe::CreateDefaultRenderer(window, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
+    auto renderer = Create<Renderer, SDL_CreateRenderer>(window.get(), nullptr, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
 
-    if(renderer.get() == nullptr) {
+    if(!renderer) {
         return __LINE__;
     }
 
