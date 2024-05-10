@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 #include "challenger_memory.hpp"
 
 #include "SDL3/SDL_video.h"
