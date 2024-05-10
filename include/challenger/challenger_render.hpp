@@ -11,29 +11,6 @@ namespace challenger {
     using Texture = SDL_ptr<SDL_Texture, SDL_DestroyTexture>;
 
     /**
-     * @brief 既定のレンダラを生成する
-     * @param window ウィンドウ
-     * @param flags 生成フラグ
-     * @return レンダラオブジェクト
-     */
-    inline const Renderer CreateDefaultRenderer(const Window& window, Uint32 flags) noexcept {
-        return Renderer(SDL_CreateRenderer(window.get(), nullptr, flags));
-    };
-
-    /**
-     * @brief テクスチャを生成する
-     * @param renderer レンダラ
-     * @param format テクスチャのフォーマット
-     * @param access テクスチャへのアクセス設定
-     * @param w テクスチャの幅
-     * @param h テクスチャの高さ
-     * @return const Texture 
-     */
-    inline const Texture CreateTexture(const Renderer renderer, const SDL_PixelFormatEnum format, const SDL_TextureAccess access, const int w, const int h) noexcept {
-        return Texture(SDL_CreateTexture(renderer.get(), format, access, w, h));
-    }
-
-    /**
      * @brief ウィンドウを元にレンダラの出力を調整する
      * 
      * @param renderer レンダラ

@@ -8,9 +8,4 @@
 
 namespace challenger {
     using Window = SDL_ptr<SDL_Window, SDL_DestroyWindow>;
-
-    inline const Window CreateWindow(const std::string& title, int w, int h, Uint32 flags) noexcept {
-        return Window(SDL_CreateWindow(title.c_str(), w, h, flags));
-    };
-
 }
