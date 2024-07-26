@@ -26,7 +26,7 @@ int main() {
         return __LINE__;
     }
 
-    auto renderer = Create<Renderer, SDL_CreateRenderer>(window.get(), nullptr, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
+    auto renderer = Create<Renderer, SDL_CreateRenderer>(window.get(), nullptr);
 
     if(!renderer) {
         return __LINE__;
@@ -45,7 +45,7 @@ int main() {
                     break;
 
                 case SDL_EVENT_KEY_DOWN:  /* quit if user hits ESC key */
-                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    if (event.key.key == SDLK_ESCAPE) {
                         isRunning = SDL_FALSE;
                     }
                     break;
