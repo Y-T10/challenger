@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.20)
 project(challenger
     VERSION 0.0.1
     LANGUAGES CXX
-    DESCRIPTION "Personal cpp template repository."
+    DESCRIPTION "SDL3向けのC++ラッパ."
 )
 
 # ビルド周りの設定
