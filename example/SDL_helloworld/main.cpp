@@ -2,8 +2,8 @@
 #include "challenger/challenger_render.hpp"
 #include "challenger/challenger_event.hpp"
 #include "challenger/challenger_video.hpp"
-#include "SDL_timer.h"
-#include "SDL_init.h"
+#include "SDL3/SDL_timer.h"
+#include "SDL3/SDL_init.h"
 
 #define BOOST_SCOPE_EXIT_CONFIG_USE_LAMBDAS
 #include "boost/scope_exit.hpp"
