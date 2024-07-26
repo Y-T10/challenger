@@ -32,15 +32,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_CXX_STANDARD 20)
 
-# CPMを有効にする
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake)
+# ネットワーク上で公開されているライブラリを取り込む
+include(FetchContent)
 
-# CPMを用いてネット上のパッケージを取り込む
-CPMAddPackage(
-    NAME SDL
-    GITHUB_REPOSITORY "libsdl-org/SDL"
-    GIT_TAG main
+FetchContent_Declare(
+    SDL
+    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+    GIT_TAG a1a82780298df6b966b8bbb5519126c80b286237
 )
+FetchContent_MakeAvailable(SDL)
 
 # システム内のパッケージを読み込む
 find_package(Threads REQUIRED)
