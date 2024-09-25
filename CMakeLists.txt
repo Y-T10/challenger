@@ -23,19 +23,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_CXX_STANDARD 20)
 
-# ネットワーク上で公開されているライブラリを取り込む
-include(FetchContent)
-
-FetchContent_Declare(
-    SDL
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-    GIT_TAG a1a82780298df6b966b8bbb5519126c80b286237
-)
-FetchContent_MakeAvailable(SDL)
-
 # システム内のパッケージを読み込む
 find_package(Threads REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED CONFIG)
+
+# SDLライブラリがあるかを確認する
+if (NOT TARGET SDL3::Headers OR NOT TARGET SDL3::SDL3)
+    ## SDLをダウンロードする
+    include(FetchContent)
+    FetchContent_Declare(
+        sdl
+        GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+        GIT_TAG main
+    )
+    FetchContent_MakeAvailable(sdl)
+endif()
 
 # ライブラリの宣言
 add_library(${PROJECT_NAME})

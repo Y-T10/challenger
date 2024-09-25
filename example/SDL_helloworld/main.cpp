@@ -12,7 +12,7 @@ namespace challe = challenger;
 using namespace challenger;
 
 int main() {
-    if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+    if (!SDL_Init(SDL_INIT_VIDEO)) {
         return __LINE__;
     }
 
@@ -41,12 +41,12 @@ int main() {
         for (const auto& event: challe::FetchAllEvents()) {
             switch (event.type) {
                 case SDL_EVENT_QUIT:  /* triggers on last window close and other things. End the program. */
-                    isRunning = SDL_FALSE;
+                    isRunning = false;
                     break;
 
                 case SDL_EVENT_KEY_DOWN:  /* quit if user hits ESC key */
                     if (event.key.key == SDLK_ESCAPE) {
-                        isRunning = SDL_FALSE;
+                        isRunning = false;
                     }
                     break;
 
