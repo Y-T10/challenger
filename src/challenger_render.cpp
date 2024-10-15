@@ -14,7 +14,7 @@ namespace {
 const bool challenger::FitRenderOutput(const Renderer& renderer, const Window& window) {
     // レンダラの出力サイズを得る
     int render_w = 0, render_h = 0;
-    if(SDL_GetRenderOutputSize(renderer.get(), &render_w, &render_h) < 0) {
+    if(!SDL_GetRenderOutputSize(renderer.get(), &render_w, &render_h)) {
         return false;
     }
 
