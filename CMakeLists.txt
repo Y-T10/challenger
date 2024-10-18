@@ -48,6 +48,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/i
 target_sources(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/challenger_render.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/challenger_event.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/chDialog.cpp
 )
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
