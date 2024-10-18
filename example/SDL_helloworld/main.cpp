@@ -2,6 +2,7 @@
 #include "challenger/challenger_render.hpp"
 #include "challenger/challenger_event.hpp"
 #include "challenger/challenger_video.hpp"
+#include "challenger/chDialog.hpp"
 #include "SDL3/SDL_timer.h"
 #include "SDL3/SDL_init.h"
 
@@ -35,6 +36,15 @@ int main() {
     SDL_FRect mouseposrect;
     mouseposrect.x = mouseposrect.y = -1000;  /* -1000 so it's offscreen at start */
     mouseposrect.w = mouseposrect.h = 50;
+
+    const FilterList ExampleFilters = {
+        {.name="PNG images", .pattern="png" },
+        { "JPEG images", "jpg;jpeg" },
+        { "GIF images", "gif" },
+        { "All images", "png;jpg;jpeg;gif" },
+        { "All files", "*" }
+    };
+    challe::ShowOpenFileDialog(window, ExampleFilters, [](const char* const* files, const int idx) {});
 
     for(bool isRunning = true; isRunning;) {
         /* run through all pending events until we run out. */
