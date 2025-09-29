@@ -24,7 +24,7 @@ if (NOT TARGET SDL3::Headers OR NOT TARGET SDL3::SDL3)
     FetchContent_Declare(
         sdl
         GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-        GIT_TAG preview-3.1.3
+        GIT_TAG release-3.2.22
     )
     FetchContent_MakeAvailable(sdl)
 endif()
