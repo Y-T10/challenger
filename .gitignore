@@ -4,3 +4,6 @@
 
 # clangd関連
 *cache*/
+
+# ユーザプリセットを除外
+CMakeUserPresets.json
