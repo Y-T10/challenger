@@ -18,16 +18,13 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED CONFIG)
 
-# SDLライブラリがあるかを確認する
+# SDLのターゲットが存在するかを確認する
 if (NOT TARGET SDL3::Headers OR NOT TARGET SDL3::SDL3)
-    ## SDLをダウンロードする
-    include(FetchContent)
-    FetchContent_Declare(
-        sdl
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-        GIT_TAG release-3.2.22
-    )
-    FetchContent_MakeAvailable(sdl)
+    ## システムからSDL3を探す
+    find_package(SDL3 REQUIRED)
+    if(NOT ${SDL3_FOUND})
+        message(FATAL_ERROR "Can't find SDL3 targetr!")
+    endif()
 endif()
 
 # ライブラリの宣言
