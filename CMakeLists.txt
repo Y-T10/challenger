@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.31)
 
 # このプロジェクトの概要を設定する
 project(challenger
@@ -6,16 +6,6 @@ project(challenger
     LANGUAGES CXX
     DESCRIPTION "SDL3向けのC++ラッパ."
 )
-
-# ビルド周りの設定
-option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
-option(CMAKE_BUILD_TYPE "Build type." Release)
-option(BUILD_EXAMPLE "Build example programs" OFF)
-
-# CMAKE_EXPORT_COMPILE_COMMANDSの既定値を設定する
-if ((NOT (DEFINED $ENV{CMAKE_EXPORT_COMPILE_COMMANDS})) AND (DEFINED CMAKE_EXPORT_COMPILE_COMMANDS))
-  set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-endif()
 
 # C++コンパイラに渡すオプションを設定する
 add_compile_options(-Wall $<$<CONFIG:Debug>:-g3>)
@@ -34,7 +24,7 @@ if (NOT TARGET SDL3::Headers OR NOT TARGET SDL3::SDL3)
     FetchContent_Declare(
         sdl
         GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-        GIT_TAG preview-3.1.3
+        GIT_TAG release-3.2.22
     )
     FetchContent_MakeAvailable(sdl)
 endif()
