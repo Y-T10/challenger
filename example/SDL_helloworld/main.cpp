@@ -21,13 +21,13 @@ int main() {
         SDL_Quit();
     };
 
-    auto window = Create<Window, SDL_CreateWindow>("Hello SDL", 640, 480, 0);
+    challenger::Window window = Create<SDL_CreateWindow, SDL_DestroyWindow>("Hello SDL", 640, 480, 0);
 
     if(!window) {
         return __LINE__;
     }
 
-    auto renderer = Create<Renderer, SDL_CreateRenderer>(window.get(), nullptr);
+    challenger::Renderer renderer = Create<SDL_CreateRenderer, SDL_DestroyRenderer>(window.get(), nullptr);
 
     if(!renderer) {
         return __LINE__;
