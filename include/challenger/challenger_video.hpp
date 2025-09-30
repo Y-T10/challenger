@@ -6,5 +6,5 @@
 
 namespace challenger {
     /// ウィンドウのスマートポインタ
-    using Window = SDL_ptr<SDL_Window, SDL_DestroyWindow>;
+    using Window = SDL_ptr<SDL_Window>;
 }

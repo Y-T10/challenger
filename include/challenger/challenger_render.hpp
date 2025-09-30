@@ -6,9 +6,9 @@
 
 namespace challenger {
     /// レンダラのスマートポインタ
-    using Renderer = SDL_ptr<SDL_Renderer, SDL_DestroyRenderer>;
+    using Renderer = SDL_ptr<SDL_Renderer>;
     /// テクスチャのスマートポインタ
-    using Texture = SDL_ptr<SDL_Texture, SDL_DestroyTexture>;
+    using Texture = SDL_ptr<SDL_Texture>;
 
     /**
      * @brief ウィンドウを元にレンダラの出力を調整する
