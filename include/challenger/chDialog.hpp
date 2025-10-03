@@ -53,8 +53,9 @@ namespace challenger {
         
         friend bool operator== (const filelist_iterator& lval, const filelist_iterator& rval) { return lval.m_cur == rval.m_cur; }
         friend bool operator!= (const filelist_iterator& lval, const filelist_iterator& rval) { return lval.m_cur != rval.m_cur; }
-        
-        pointer m_cur;
+
+        private:
+            pointer m_cur;
     };
 
     /// filelist_iteratorの先頭を返す
