@@ -2,7 +2,7 @@
 #include "challenger/challenger_render.hpp"
 #include "challenger/challenger_event.hpp"
 #include "challenger/challenger_video.hpp"
-#include "challenger/chDialog.hpp"
+#include "challenger/challenger_dialog.hpp"
 #include "SDL3/SDL_timer.h"
 #include "SDL3/SDL_init.h"
 #include <future>

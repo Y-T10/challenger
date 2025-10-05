@@ -1,4 +1,4 @@
-#include "challenger/chDialog.hpp"
+#include "challenger/challenger_dialog.hpp"
 #include <cassert>
 
 namespace challenger {
