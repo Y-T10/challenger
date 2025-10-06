@@ -2,9 +2,10 @@
 #include "challenger/challenger_render.hpp"
 #include "challenger/challenger_event.hpp"
 #include "challenger/challenger_video.hpp"
-#include "challenger/chDialog.hpp"
+#include "challenger/challenger_dialog.hpp"
 #include "SDL3/SDL_timer.h"
 #include "SDL3/SDL_init.h"
+#include <future>
 
 #define BOOST_SCOPE_EXIT_CONFIG_USE_LAMBDAS
 #include "boost/scope_exit.hpp"
@@ -21,13 +22,13 @@ int main() {
         SDL_Quit();
     };
 
-    auto window = Create<Window, SDL_CreateWindow>("Hello SDL", 640, 480, 0);
+    challenger::Window window = Create<SDL_CreateWindow, SDL_DestroyWindow>("Hello SDL", 640, 480, 0);
 
     if(!window) {
         return __LINE__;
     }
 
-    auto renderer = Create<Renderer, SDL_CreateRenderer>(window.get(), nullptr);
+    challenger::Renderer renderer = Create<SDL_CreateRenderer, SDL_DestroyRenderer>(window.get(), nullptr);
 
     if(!renderer) {
         return __LINE__;
@@ -44,7 +45,11 @@ int main() {
         { "All images", "png;jpg;jpeg;gif" },
         { "All files", "*" }
     };
-    challe::ShowOpenFileDialog(window, ExampleFilters, [](const char* const* files, const int idx) {});
+
+    std::promise<std::vector<std::string>> selected_list;
+    auto result = selected_list.get_future();
+        
+    challe::ShowOpenFileDialog(window, [&selected_list](const PathList& list, const int n) mutable { selected_list.set_value(list);}, ExampleFilters);
 
     for(bool isRunning = true; isRunning;) {
         /* run through all pending events until we run out. */
@@ -65,6 +70,15 @@ int main() {
                     mouseposrect.x = event.motion.x - (mouseposrect.w / 2);
                     mouseposrect.y = event.motion.y - (mouseposrect.h / 2);
                     break;
+            }
+        }
+
+        if (result.valid()) {
+            if (std::future_status::ready == result.wait_for(std::chrono::milliseconds(1))) {
+                const auto tmp = result.get();
+                for(const auto &path: tmp) {
+                    std::printf("selected: %s\n", path.c_str());
+                }
             }
         }
 

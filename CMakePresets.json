@@ -4,16 +4,27 @@
         "major": 3, "minor": 31, "patch": 0
     },
     "$comment": "CMakeの最小バージョンはUbuntuの最新LSTにて利用可能なバイナリのバージョンに合わせる．",
-    "configurePresets": [{
-        "name": "default",
-        "displayName": "Default config",
-        "binaryDir": "${sourceDir}/build",
-        "cacheVariables": {
-            "CMAKE_BUILD_TYPE": "Release",
-            "BUILD_SHARED_LIBS": "OFF", 
-            "BUILD_EXAMPLE": "OFF"
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default config",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_SHARED_LIBS": "OFF", 
+                "BUILD_EXAMPLE": "OFF"
+            }
+        },
+        {
+            "name": "buid_example",
+            "displayName": "Build example",
+            "binaryDir": "${sourceDir}/build",
+            "inherits": [ "default" ],
+            "cacheVariables": {
+                "BUILD_EXAMPLE": "ON"
+            }
         }
-    }],
+    ],
     "buildPresets": [{
         "name": "default", "configurePreset": "default"
     }],

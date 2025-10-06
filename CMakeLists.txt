@@ -9,6 +9,7 @@ project(challenger
 
 # C++コンパイラに渡すオプションを設定する
 add_compile_options(-Wall $<$<CONFIG:Debug>:-g3>)
+set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -17,16 +18,13 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED CONFIG)
 
-# SDLライブラリがあるかを確認する
+# SDLのターゲットが存在するかを確認する
 if (NOT TARGET SDL3::Headers OR NOT TARGET SDL3::SDL3)
-    ## SDLをダウンロードする
-    include(FetchContent)
-    FetchContent_Declare(
-        sdl
-        GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-        GIT_TAG release-3.2.22
-    )
-    FetchContent_MakeAvailable(sdl)
+    ## システムからSDL3を探す
+    find_package(SDL3 REQUIRED)
+    if(NOT ${SDL3_FOUND})
+        message(FATAL_ERROR "Can't find SDL3 targetr!")
+    endif()
 endif()
 
 # ライブラリの宣言
@@ -38,7 +36,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/i
 target_sources(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/challenger_render.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/challenger_event.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/chDialog.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/challenger_dialog.cpp
 )
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
@@ -47,5 +45,6 @@ target_link_libraries(
 
 # サンプルプログラムのビルド
 if(${BUILD_EXAMPLE})
+    message(STATUS "Build examples.")
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/example)
 endif()
