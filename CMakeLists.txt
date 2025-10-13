@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.31)
 
 # このプロジェクトの概要を設定する
 project(challenger
-    VERSION 0.0.1
+    VERSION 0.0.4p1
     LANGUAGES CXX
     DESCRIPTION "SDL3向けのC++ラッパ."
 )
@@ -19,10 +19,15 @@ find_package(Threads REQUIRED)
 find_package(Boost REQUIRED CONFIG)
 
 # SDLのターゲットが存在するかを確認する
-if (NOT TARGET SDL3::Headers OR NOT TARGET SDL3::SDL3)
+if (TARGET SDL3::SDL3)
+    message(STATUS "SDL3::SDL3 target already exists.")
+else()
+    message(STATUS "SDL3::SDL3 is not found, so find SDL3 package.")
     ## システムからSDL3を探す
-    find_package(SDL3 REQUIRED)
-    if(NOT ${SDL3_FOUND})
+    find_package(SDL3 REQUIRED CONFIG)
+    if(TARGET SDL3::SDL3)
+        message(STATUS "Found SDL3::SDL3 target.")
+    else()
         message(FATAL_ERROR "Can't find SDL3 targetr!")
     endif()
 endif()
@@ -40,7 +45,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 )
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
-    SDL3::SDL3 Threads::Threads Boost::boost
+    SDL3::Headers Threads::Threads Boost::boost
 )
 
 # サンプルプログラムのビルド
