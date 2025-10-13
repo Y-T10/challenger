@@ -45,7 +45,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 )
 target_link_libraries(
     ${PROJECT_NAME} PUBLIC
-    SDL3::SDL3 Threads::Threads Boost::boost
+    SDL3::Headers Threads::Threads Boost::boost
 )
 
 # サンプルプログラムのビルド
