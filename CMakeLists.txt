@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.31)
 
 # このプロジェクトの概要を設定する
 project(challenger
-    VERSION 0.0.4p1
+    VERSION 0.0.4
     LANGUAGES CXX
     DESCRIPTION "SDL3向けのC++ラッパ."
 )
